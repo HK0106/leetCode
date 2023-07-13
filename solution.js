@@ -15,7 +15,7 @@ const eventualSafeNodes = function(graph) {
     visit[node] = 1;
 
     for (let edge of graph[node]) {
-      if (dfs(edge)) {
+      if (!dfs(edge)) {
         return false;
       }
     }
