@@ -1,15 +1,17 @@
 /**
- * @param {number[]} arr
- * @param {number} difference
+ * @param {number[][]} events
+ * @param {number} k
  * @return {number}
  */
-const longestSubsequence = function(arr, difference) {
-  let max = 1
-  const m = {};
-  for (let i = 0; i < arr.length; i++) {
-    const val = arr[i];
-    m[val] = m[val - difference] ? m[val - difference] + 1 : 1;
-    max = Math.max(max, m[val]);
+const maxValue = function(events, k) {
+  events.sort((a, b) => a[0] - b[0]);
+  let n = events.length, obj = {}
+  const max = (i, k, prev) => {
+    if(i === n || k === 0)return 0;
+    let str = `${i}-${k}-${prev}`
+    if( obj[str] )return obj[str];
+    if(prev >= events[i][0])return obj[str] = max(i + 1, k, prev);
+    return obj[str] = Math.max(events[i][2] + max(i + 1, k - 1, events[i][1]), max(i + 1, k, prev))
   }
-  return max
+  return max(0 , k , 0)
 };
