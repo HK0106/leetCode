@@ -15,15 +15,19 @@ const numIdenticalPairs = function(nums) {
 }
 
 const numIdenticalPairs1 = function(nums) {
-    let ans = 0;
-    const cnt = {};
+    let count = {};
+    let result = 0;
 
-    for (let x of A) {
-        ans += cnt[x] || 0;
-        cnt[x] = (cnt[x] || 0) + 1;
+    for (let num of nums) {
+        if (num in count) {
+            result += count[num];
+            count[num]++;
+        } else {
+            count[num] = 1;
+        }
     }
 
-    return ans;
+    return result;
 }
 
 console.log(numIdenticalPairs([1,2,3,1,1,3]))
