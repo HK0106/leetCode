@@ -19,7 +19,7 @@ const numIdenticalPairs1 = function(nums) {
     let result = 0;
 
     for (let num of nums) {
-        if (num in count) {
+        if (count[num]) {
             result += count[num];
             count[num]++;
         } else {
