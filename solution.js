@@ -4,19 +4,22 @@
  * @return {number[]}
  */
 const twoSum = function(nums, target) {
-    const numToIndex = {}; // A map to store numbers and their indices
-
-    for (let i = 0; i < nums.length; i++) {
-        const complement = target - nums[i];
-        console.log(numToIndex)
-        if (complement in numToIndex) {
-            return [numToIndex[complement], i];
+    nums = nums.sort((a,b) => a-b);
+    let low = 0;
+    let high = nums.length - 1;
+    while (low <= high) {
+        if (nums[low] + nums[high] > target) {
+            high--;
+        } else if (nums[low] + nums[high] < target) {
+            low++;
+        } else {
+            return [low, high];
         }
 
-        numToIndex[nums[i]] = i;
     }
 
-    return []; // Return an empty array if no solution is found
 };
 
+console.log(twoSum([2,7,11,15], 9))
+console.log(twoSum([3,2,4], 6))
 console.log(twoSum([3,3], 6))
