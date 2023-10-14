@@ -2,17 +2,8 @@
  * @param {number[]} nums
  * @return {boolean}
  */
-const containsDuplicate = function(nums) {
-  const map = {};
-  for (let i = 0; i < nums.length; i ++) {
-    console.log(map)
-    console.log(map[nums[i]])
-    if (map[nums[i]]) {
-      return true;
-    } else {
-      map[nums[i]] = 1
-    }
-  }
-  return false
-};
+const containsDuplicate = (nums) => {
+  const reduced = nums.reduce((collector, currVal)=>collector.add(currVal), new Set())
+  return nums.length !== reduced.size
+}
 console.log(containsDuplicate([1,2,3,1]));
