@@ -4,29 +4,18 @@
  * @return {boolean}
  */
 const isAnagram = function(s, t) {
-  const map1 = {};
-  const map2 = {};
+  const sortedS = s.split('').sort().join('');
+  const sortedT = t.split('').sort().join('');
   if (s.length !== t.length) {
     return false;
-  }
-  for (let i = 0; i < s.length; i++) {
-    if (map1[s[i]]) {
-      map1[s[i]]++;
-    } else {
-      map1[s[i]] = 1;
+  } else {
+    for (let i = 0; i < s.length; i++) {
+     if (sortedS[i] !== sortedT[i]) {
+       return  false
+     }
     }
-    if (map2[t[i]]) {
-      map2[t[i]]++;
-    } else {
-      map2[t[i]] = 1;
-    }
+    return true;
   }
-  for (const map1Key in map1) {
-    if (map1[map1Key] !== map2[map1Key]) {
-      return false;
-    }
-  }
-  return true;
 };
 
 console.log(isAnagram('anagram','nagaram'))
