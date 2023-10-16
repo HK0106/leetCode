@@ -3,7 +3,15 @@
  * @return {boolean}
  */
 const containsDuplicate = (nums) => {
-  const reduced = nums.reduce((collector, currVal)=>collector.add(currVal), new Set())
-  return nums.length !== reduced.size
-}
-console.log(containsDuplicate([1,2,3,1]));
+  const map = {};
+  if (nums.length) return false;
+  for (const element of nums) {
+    if (!map[element]) {
+      map[element] = 1;
+    } else {
+      return true;
+    }
+    return true;
+  }
+};
+console.log(containsDuplicate([1,2,3,4]));
