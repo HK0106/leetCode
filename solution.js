@@ -4,20 +4,15 @@
  * @return {number[]}
  */
 const twoSum = function(nums, target) {
-    nums = nums.sort((a,b) => a-b);
-    let low = 0;
-    let high = nums.length - 1;
-    while (low <= high) {
-        if (nums[low] + nums[high] > target) {
-            high--;
-        } else if (nums[low] + nums[high] < target) {
-            low++;
+    const map = {};
+    for (const [index, mapElement] of nums.entries()) {
+        if ((target - mapElement) in map) {
+            return [map[target - mapElement], index];
         } else {
-            return [low, high];
+            map[mapElement] = index;
         }
-
     }
-
+    return [];
 };
 
 console.log(twoSum([2,7,11,15], 9))
