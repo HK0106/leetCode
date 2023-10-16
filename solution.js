@@ -5,16 +5,16 @@
  * @return {string[][]}
  */
 const groupAnagrams = function(strs) {
-  const map = {};
-  for (let i = 0; i < strs.length; i++) {
-    let tempString = strs[i].split('').sort().join('')
-    if (map[tempString]) {
-      map[tempString].push(strs[i]);
-    } else {
-      map[tempString] = [strs[i]];
+    const map = {}
+    for (let i = 0; i < strs.length; i++) {
+        const temp = strs[i].split('').sort().join('');
+        if (temp in map) {
+            map[temp].push(strs[i]);
+        } else {
+            map[temp] = [strs[i]];
+        }
     }
-  }
-  return Object.values(map);
+    return Object.values(map)
 };
 
 
