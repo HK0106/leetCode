@@ -1,28 +1,59 @@
 /**
- * @param {number} n
- * @return {string[]}
+ * @param {number[]} height
+ * @return {number}
  */
-const generateParenthesis = (n) => {
-    const res = [];
+const trap = function(height) {
+    let sumResult = 0;
+    if (height.length === 0) {
+        return sumResult;
+    }
+    let leftMax = [];
+    let rightMax = [];
 
-    const go = (l, r, s) => {
-        console.log('===========================')
-        console.log('=res=',res);
-        console.log('=str=',s);
-        console.log('=l=',l);
-        console.log('=r=',r);
-        console.log('===========================')
-        if (s.length === 2 * n) {
-            res.push(s);
-            return;
+
+    let tempMax = -1;
+    for (let i = 0; i < height.length; i++) {
+        if (i === 0) {
+            leftMax.push(0);
+        } else {
+            if (height[i - 1] > tempMax) {
+                tempMax = height[i - 1];
+                leftMax.push(height[i - 1]);
+            } else {
+                leftMax.push(tempMax)
+            }
         }
 
-        if (l < n) go(l + 1, r, s + '(');
-        if (r < l) go(l, r + 1, s + ')');
-    };
 
-    go(0, 0, '');
-    return res;
+    }
+    tempMax = -1;
+    for (let i = height.length - 1; i >= 0; i--) {
+        if (i === height.length -1) {
+            rightMax[height.length-1]=0;
+        } else {
+            if (height[i+1] > tempMax) {
+                tempMax = height[i+1];
+                rightMax[i] = height[i+1]
+            } else {
+                rightMax[i] = tempMax;
+            }
+        }
+
+    }
+    for (let i = 0; i < height.length; i++) {
+        let tempWater = 0;
+        if (leftMax[i] <= rightMax[i]) {
+            tempWater += leftMax[i] - height[i];
+        } else {
+            tempWater += rightMax[i] - height[i];
+        }
+        if (tempWater > 0) {
+            sumResult += tempWater;
+        }
+    }
+
+    return sumResult
 };
 
-console.log(generateParenthesis(3))
+console.log(trap([0,1,0,2,1,0,1,3,2,1,2,1]), `Expect [6]`)
+console.log(trap([4,2,0,3,2,5]), `Expect [9]`)
