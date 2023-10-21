@@ -3,6 +3,7 @@
  * @return {number}
  */
 const largestRectangleArea = function(heights) {
+    heights.push(0);
     let stack = [];
     let result = 0;
     for (let i = 0; i < heights.length; i++) {
@@ -14,7 +15,8 @@ const largestRectangleArea = function(heights) {
         }
         stack.push([heightStart, heights[i]]);
     }
+    return result;
 };
 
 console.log(largestRectangleArea([2,1,5,6,2,3]), 'Expected: 10')
-// console.log(largestRectangleArea([2,4]), 'Expected: 4')
+console.log(largestRectangleArea([2,4]), 'Expected: 4')
